@@ -1,12 +1,30 @@
-const Items = () => {
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, initialState, removeItem } from '../redux/itemsSlice';
+
+const Items: React.FC = () => {
+    const [name, setName] = useState<string>('');
+    const dispatch = useDispatch();
+
+    const items = useSelector((state: { items: initialState }) => state.items.items);
+
+    const handleAction = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (name.trim().length) {
+            dispatch(addItem({ name }));
+            setName('');
+        }
+    };
     return (
         <div>
             <div className='items-column column'>
                 <h1>Items</h1>
-                <form>
+                <form onSubmit={handleAction}>
                     <input
                         type='text'
                         placeholder='Type name here'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         required
                     />
                     <button
@@ -17,11 +35,22 @@ const Items = () => {
                     </button>
                 </form>
                 <ul className='items-list'>
-                    <li className='items-list-item active'>
-                        <>1</>
-                        <span className='badge'>1</span>
-                        <button className='btn btn-delete'>Delete</button>
-                    </li>
+                    {items.map((item) => (
+                        <li
+                            key={item.id}
+                            className='items-list-item active'
+                        >
+                            <>{item.name}</>
+                            <span className='badge'>{item.comments.length}</span>
+                            <button
+                                type='button'
+                                onClick={() => dispatch(removeItem({ id: item.id }))}
+                                className='btn btn-delete'
+                            >
+                                Delete
+                            </button>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>

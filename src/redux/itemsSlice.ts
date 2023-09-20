@@ -10,7 +10,7 @@ const itemsSlice = createSlice({
     reducers: {
         addItem(state, action) {
             state.items.push({
-                id: new Date().toISOString(),
+                id: Math.floor(Date.now() / 100),
                 name: action.payload.name,
                 comments: [],
             });
@@ -25,10 +25,10 @@ export const { addItem, removeItem } = itemsSlice.actions;
 export default itemsSlice.reducer;
 
 type item = {
-    id: string;
+    id: number;
     name: string;
     comments: [];
 };
-type initialState = {
+export type initialState = {
     items: item[];
 };
