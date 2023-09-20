@@ -1,12 +1,21 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, initialState, removeItem } from '../redux/itemsSlice';
+import { addItem, initialState, removeItem, setActiveItem } from '../redux/itemsSlice';
 
 const Items: React.FC = () => {
     const [name, setName] = useState<string>('');
     const dispatch = useDispatch();
 
     const items = useSelector((state: { items: initialState }) => state.items.items);
+    // const [activeItem, setActiveItem] = useState<number | null>(
+    //     items.length > 0 ? items[0].id : null
+    // );
+
+    const activeItem = items?.find((item) => item.active);
+    if (!activeItem && items.length > 0) {
+        dispatch(setActiveItem({ id: items[0].id }));
+    }
+    console.log(items);
 
     const handleAction = (e: React.FormEvent) => {
         e.preventDefault();
@@ -15,6 +24,7 @@ const Items: React.FC = () => {
             setName('');
         }
     };
+
     return (
         <div>
             <div className='items-column column'>
@@ -38,10 +48,11 @@ const Items: React.FC = () => {
                     {items.map((item) => (
                         <li
                             key={item.id}
-                            className='items-list-item active'
+                            className={`items-list-item ${item.active ? 'active' : ''}`}
+                            onClick={() => dispatch(setActiveItem({ id: item.id }))}
                         >
                             <>{item.name}</>
-                            <span className='badge'>{item.comments.length}</span>
+                            <span className='badge'>{item.comments?.length}</span>
                             <button
                                 type='button'
                                 onClick={() => dispatch(removeItem({ id: item.id }))}
