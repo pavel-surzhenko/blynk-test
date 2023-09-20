@@ -112,6 +112,13 @@
     background-color: #17a2b8;
     border-color: #17a2b8;
 }
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
 .btn {
     cursor: pointer;
     display: inline-block;
@@ -206,10 +213,20 @@ pre {
     background-color: #007bff;
     border-color: #007bff;
 }
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
 .btn-delete {
     color: #dc3545;
     background-color: transparent;
     background-image: none;
+    border-color: #dc3545;
+}
+.btn-delete:hover {
+    color: #fff;
+    background-color: #dc3545;
     border-color: #dc3545;
 }
 
