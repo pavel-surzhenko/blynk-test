@@ -1,34 +1,42 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addComment } from '../redux/itemsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addComment, initialState } from '../redux/itemsSlice';
 
 const Comments = () => {
     const [text, setText] = useState<string>('');
     const [color, setColor] = useState<string>('#000000');
     const dispatch = useDispatch();
 
+    const activeItem = useSelector((state: { items: initialState }) =>
+        state.items.items.find((item) => item.active)
+    );
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         if (text.trim().length) {
-            dispatch(addComment({ text, color }));
+            dispatch(addComment({ id: activeItem?.id, text, color }));
+            setText('');
+            setColor('#000000');
         }
     };
 
     return (
         <div>
             <div className='comments-column column'>
-                <h1>Comments</h1>
+                <h1>Comments #{activeItem?.id}</h1>
                 <div>
-                    <div className='card'>
-                        <div
-                            className='card-color'
-                            style={{ backgroundColor: '#000000' }}
-                        ></div>
-                        <div className='card-body'>
-                            <pre>1</pre>
+                    {activeItem?.comments.map((comment) => (
+                        <div className='card'>
+                            <div
+                                className='card-color'
+                                style={{ backgroundColor: `${comment.color}` }}
+                            ></div>
+                            <div className='card-body'>
+                                <pre>{comment.body}</pre>
+                            </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
                 <form onSubmit={handleSubmit}>
                     <input
@@ -50,7 +58,6 @@ const Comments = () => {
                     >
                         Add New
                     </button>
-                    <ul className='items-list'></ul>
                 </form>
             </div>
         </div>

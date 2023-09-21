@@ -25,9 +25,9 @@ const itemsSlice = createSlice({
             const { text, color } = action.payload;
             const item = state.items.find((item) => item.id === action.payload.id);
 
-            // if(item) {
-            //     item.comments.push()
-            // }
+            if (item) {
+                item.comments.push({ id: item.id + '-' + item.comments.length, body: text, color });
+            }
         },
         setActiveItem(state, action) {
             const { id } = action.payload;
@@ -42,12 +42,19 @@ const itemsSlice = createSlice({
 export const { addItem, removeItem, addComment, setActiveItem } = itemsSlice.actions;
 export default itemsSlice.reducer;
 
-type item = {
+type commentsType = {
+    id: string;
+    body: string;
+    color: string;
+};
+
+type itemType = {
     id: number;
     name: string;
-    comments: [];
+    comments: commentsType[];
     active: boolean;
 };
+
 export type initialState = {
-    items: item[];
+    items: itemType[];
 };

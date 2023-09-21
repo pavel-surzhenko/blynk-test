@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, initialState, removeItem, setActiveItem } from '../redux/itemsSlice';
 
@@ -7,15 +7,14 @@ const Items: React.FC = () => {
     const dispatch = useDispatch();
 
     const items = useSelector((state: { items: initialState }) => state.items.items);
-    // const [activeItem, setActiveItem] = useState<number | null>(
-    //     items.length > 0 ? items[0].id : null
-    // );
-
-    const activeItem = items?.find((item) => item.active);
-    if (!activeItem && items.length > 0) {
-        dispatch(setActiveItem({ id: items[0].id }));
-    }
     console.log(items);
+
+    useEffect(() => {
+        const activeItem = items?.find((item) => item.active);
+        if (!activeItem && items.length > 0) {
+            dispatch(setActiveItem({ id: items[0].id }));
+        }
+    }, [items, dispatch]);
 
     const handleAction = (e: React.FormEvent) => {
         e.preventDefault();
