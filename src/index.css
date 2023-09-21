@@ -15,18 +15,15 @@
 }
 .container-fluid {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    padding: 0px 15px 0px;
+    margin: 0 auto;
 }
 
 .sidebar {
     position: relative;
     width: 100%;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 0px 15px 0px;
     flex: 0 0 16.666667%;
     max-width: 16.666667%;
 }
@@ -48,28 +45,24 @@
 .sidebar div {
     color: #5b5d63;
 }
+
 .main {
     flex: 0 0 83.333333%;
     max-width: 83.333333%;
     position: relative;
     width: 100%;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 0px 15px 0px;
 }
 .main-container {
-    margin-top: 20px;
+    margin: 20px auto 0px;
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    padding: 0px 15px 0px;
 }
 .row {
     display: flex;
     justify-content: space-around;
-    margin-left: -15px;
-    margin-right: -15px;
+    margin: 0 -15px;
     flex-wrap: wrap;
 }
 .column {
@@ -107,17 +100,6 @@
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.btn-info {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-}
-
-.btn-info:hover {
-    color: #fff;
-    background-color: #138496;
-    border-color: #117a8b;
-}
 
 .btn {
     cursor: pointer;
@@ -136,6 +118,38 @@
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     max-height: 90px;
 }
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-info:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+.btn-delete {
+    color: #dc3545;
+    background-color: transparent;
+    background-image: none;
+    border-color: #dc3545;
+}
+.btn-delete:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 .items-list {
     display: flex;
     flex-direction: column;
@@ -156,6 +170,7 @@
 .items-list-item.active {
     border-left: 4px solid deeppink;
 }
+
 .card {
     position: relative;
     display: flex;
@@ -187,7 +202,6 @@
 .card-text:last-child {
     margin-bottom: 0;
 }
-
 pre {
     display: block;
     font-size: 87.5%;
@@ -197,6 +211,7 @@ pre {
     white-space: pre-wrap;
     max-width: 400px;
 }
+
 .comments-column form {
     margin-top: 20px;
     display: flex;
@@ -208,27 +223,6 @@ pre {
 .comments-column textarea {
     margin: 0 10px;
     height: auto;
-}
-.btn-primary {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-}
-.btn-primary:hover {
-    color: #fff;
-    background-color: #0069d9;
-    border-color: #0062cc;
-}
-.btn-delete {
-    color: #dc3545;
-    background-color: transparent;
-    background-image: none;
-    border-color: #dc3545;
-}
-.btn-delete:hover {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
 }
 
 .badge {
@@ -248,7 +242,6 @@ pre {
     white-space: nowrap;
     vertical-align: baseline;
 }
-
 .form-control {
     display: block;
     width: 100%;
@@ -263,12 +256,12 @@ pre {
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 @media (min-width: 992px) {
     .main-container {
         max-width: 960px;
     }
 }
-
 @media (min-width: 1200px) {
     .main-container {
         max-width: 1140px;

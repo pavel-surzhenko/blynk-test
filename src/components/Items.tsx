@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, initialState, removeItem, setActiveItem } from '../redux/itemsSlice';
+import { addItem, removeItem, setActiveItem } from '../redux/itemActions';
+import { initialState } from '../redux/types';
 
 const Items: React.FC = () => {
     const [name, setName] = useState<string>('');
     const dispatch = useDispatch();
 
     const items = useSelector((state: { items: initialState }) => state.items.items);
-    console.log(items);
 
     useEffect(() => {
         const activeItem = items?.find((item) => item.active);

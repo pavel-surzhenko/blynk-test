@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComment, initialState } from '../redux/itemsSlice';
+import { addComment } from '../redux/itemActions';
+import { initialState } from '../redux/types';
 
 const Comments = () => {
     const [text, setText] = useState<string>('');
@@ -11,11 +12,11 @@ const Comments = () => {
         state.items.items.find((item) => item.active)
     );
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (text.trim().length) {
-            dispatch(addComment({ id: activeItem?.id, text, color }));
+        if (activeItem && text.trim().length) {
+            dispatch(addComment({ id: activeItem.id, text, color }));
             setText('');
             setColor('#000000');
         }
@@ -26,17 +27,21 @@ const Comments = () => {
             <div className='comments-column column'>
                 <h1>Comments #{activeItem?.id}</h1>
                 <div>
-                    {activeItem?.comments.map((comment) => (
-                        <div className='card'>
+                    {activeItem &&
+                        activeItem.comments.map((comment) => (
                             <div
-                                className='card-color'
-                                style={{ backgroundColor: `${comment.color}` }}
-                            ></div>
-                            <div className='card-body'>
-                                <pre>{comment.body}</pre>
+                                className='card'
+                                key={comment.id}
+                            >
+                                <div
+                                    className='card-color'
+                                    style={{ backgroundColor: `${comment.color}` }}
+                                ></div>
+                                <div className='card-body'>
+                                    <pre>{comment.body}</pre>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
                 </div>
                 <form onSubmit={handleSubmit}>
                     <input
