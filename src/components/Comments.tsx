@@ -51,7 +51,7 @@ const Comments = () => {
                         onChange={(e) => setColor(e.target.value)}
                     />
                     <textarea
-                        placeholder='Type comment here'
+                        placeholder='Type comment here...'
                         required
                         className='form-control'
                         value={text}

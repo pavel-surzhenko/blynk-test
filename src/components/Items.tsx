@@ -31,7 +31,7 @@ const Items: React.FC = () => {
                 <form onSubmit={handleAction}>
                     <input
                         type='text'
-                        placeholder='Type name here'
+                        placeholder='Type name here...'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
